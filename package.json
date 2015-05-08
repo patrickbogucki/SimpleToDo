@@ -1,0 +1,26 @@
+{
+  "name": "SimpleToDo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "scripts.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/patrickbogucki/SimpleToDo.git"
+  },
+  "author": "Patrick Bogucki",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "2.6.5",
+    "gulp-plumber": "1.0.0",
+    "gulp-rename": "1.2.2",
+    "gulp-sass": "1.3.3",
+    "gulp": "3.8.11"
+  },
+  "bugs": {
+    "url": "https://github.com/patrickbogucki/SimpleToDo/issues"
+  },
+  "homepage": "https://github.com/patrickbogucki/SimpleToDo"
+}
