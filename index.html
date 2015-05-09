@@ -2,10 +2,42 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="dist/styles/styles.css">
 	<title>To Do App</title>
 </head>
 <body>
-	<h1>Bootstrap</h1>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>To Do List</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+			  <div class="form-group">
+			    <label for="activity">Activity</label>
+			    <input type="text" class="form-control" id="activity" placeholder="Enter activity">
+			  </div>
+			  <button type="submit" class="btn btn-default add">Add</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6 activity-list activity-list-empty">
+				<p class="empty-text">There are no activities here.</p>
+				<ul class="activities">
+				</ul>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<button class="btn btn-default delete-all">Delete All</button>
+			</div>
+		</div>
+	</div>	
+	<script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="scripts.js"></script>
+
 </body>
 </html>
