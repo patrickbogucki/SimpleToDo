@@ -9,10 +9,23 @@ h1 {
 .activity-list {
 	background-color: #ffffff;
 	margin-top: 20px;
+
+	li {
+		list-style: none;
+	}
 }
+
+.delete {
+	display: block;
+}
+
 
 .activity-list-empty {
 	ul {
 		// display: none;
 	}
+}
+
+.empty {
+	display: none;
 }
