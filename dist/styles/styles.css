@@ -27,9 +27,7 @@ h1 {
   float: left;
   text-align: left; }
 
-.activity-text,
-.edit,
-.delete {
+.activity-text, .edit, .delete {
   margin-top: 3px;
   margin-bottom: 3px; }
 
