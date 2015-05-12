@@ -1,5 +1,15 @@
+var max_word_count = 100;
+
 var main = function() {
 	var activity;
+
+	reset_word_counter();
+
+	$('.form-control').attr('maxlength', max_word_count);
+
+	$('.form-control').keyup(function() {$('.word-count').text(function() {
+				return max_word_count - $('.form-control').val().length;
+			});});
 
 	$('.add').click(function() {
 		console.log($('.form-control').val());
@@ -22,6 +32,7 @@ var main = function() {
 
 			$('.empty-text').addClass('empty');
 		}
+		reset_word_counter();
 	});
 
 	$('.delete').on('click', function() {
@@ -51,6 +62,10 @@ var main = function() {
 	});
 
 	
+};
+
+var reset_word_counter = function() {
+	$('.word-count').text(max_word_count);
 };
 
 var activity_item_html = function(activity) { 

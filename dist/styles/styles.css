@@ -4,6 +4,9 @@ body {
 h1 {
   color: #000999; }
 
+.word-count {
+  display: inline; }
+
 .activity-list {
   background-color: #ffffff;
   margin-top: 30px;
@@ -18,7 +21,8 @@ h1 {
   padding: 0px; }
   .activities li {
     list-style: none;
-    height: auto; }
+    margin-top: 3px;
+    margin-bottom: 3px; }
 
 .activity-checkbox {
   margin-right: 10px; }
@@ -27,12 +31,14 @@ h1 {
   float: left;
   text-align: left; }
 
-.activity-text, .edit, .delete {
-  margin-top: 3px;
-  margin-bottom: 3px; }
+.edit, .delete {
+  margin-left: 10px; }
 
 .empty-text {
   margin-top: 10px; }
 
 .empty {
   display: none; }
+
+input[type='checkbox'] {
+  margin-right: 20px; }
