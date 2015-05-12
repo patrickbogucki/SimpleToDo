@@ -35,6 +35,10 @@ h1 {
 
 .empty-text {
   margin-top: 10px; }
+  .activity-list li {
+    list-style: none; }
 
+.delete {
+  display: block; }
 .empty {
   display: none; }

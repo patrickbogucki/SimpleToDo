@@ -61,4 +61,22 @@ h1 {
 .empty {
 	display: none;
 }
+	li {
+		list-style: none;
+	}
+}
 
+.delete {
+	display: block;
+}
+
+
+.activity-list-empty {
+	ul {
+		// display: none;
+	}
+}
+
+.empty {
+	display: none;
+}
