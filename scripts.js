@@ -2,24 +2,29 @@ var max_word_count = 100;
 
 var main = function() {
 	var activity;
+	var wordsRemaining;
 
-	reset_word_counter();
+	resetWordCounter();
+	initWordCounter($('.new-activity-textbox'));
 
-	$('.form-control').attr('maxlength', max_word_count);
+	$('.edit-activity-textbox').attr('maxlength', max_word_count);
 
-	$('.form-control').keyup(function() {$('.word-count').text(function() {
-				return max_word_count - $('.form-control').val().length;
-			});});
 
 	$('.add').click(function() {
-		console.log($('.form-control').val());
-		activity = $('.form-control').val();
-		if(activity === '') {
+		console.log($('.new-activity-textbox').val());
+		activity = $('.new-activity-textbox');
+		if(activity.val() === '') {
 			alert('Please enter an activity.');
 		} else {
-			$('.form-control').val('');
+			$('ul').append(activity_item_html(activity.val()));
+			
+			$('.new-activity-textbox').val('');
 
-			$('ul').append(activity_item_html(activity));
+			$('.edit').on('click', function() {
+				console.log('hi');
+				$('#editModal').modal('show');
+				initWordCounter($('.edit-activity-textbox'));
+			});
 
 			$('.delete').click(function() {
 				$(this).parent().fadeOut('slow', function() {
@@ -32,13 +37,10 @@ var main = function() {
 
 			$('.empty-text').addClass('empty');
 		}
-		reset_word_counter();
+		resetWordCounter();
+		$('.new-activity-textbox').focus();
 	});
 
-	$('.delete').on('click', function() {
-		console.log('hello world');
-		$('.activity-item').remove();
-	});
 
 	$('.delete-selected').click(function() {
 		$('.activity-checkbox').each(function() {
@@ -61,15 +63,32 @@ var main = function() {
 		});
 	});
 
+
+	$('.btn-modal-close').click(function() {
+		resetWordCounter();
+	});
 	
 };
 
-var reset_word_counter = function() {
-	$('.word-count').text(max_word_count);
+var resetWordCounter = function() {
+	$('.word-count-value').text(max_word_count);
+};
+
+var initWordCounter = function(textbox) {
+	textbox.attr('maxlength', max_word_count);
+	textbox.focus();
+	textbox.keyup(function() {
+		console.log('hello');
+		$('.word-count-value').text(function() {
+				wordsRemaining = max_word_count - textbox.val().length;
+
+				return wordsRemaining;
+			});
+	});
 };
 
 var activity_item_html = function(activity) { 
-		return '<li class="activity-item"><div class="activity-text"><input type="checkbox" name="activity" class=activity-checkbox>' + activity + '</div><button class="btn btn-default btn-xs edit">Edit</button><button class="btn btn-default btn-xs delete">Delete</button></li>';
+		return '<li class="activity-item"><div class="activity-text"><input type="checkbox" name="activity" class=activity-checkbox>' + activity + '</div><button class="btn btn-default btn-xs edit" target="#editModal">Edit</button><button class="btn btn-default btn-xs delete">Delete</button></li>';
 	};
 
 $(document).ready(main);

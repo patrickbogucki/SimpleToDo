@@ -4,8 +4,11 @@ body {
 h1 {
   color: #000999; }
 
-.word-count {
+.word-count, .word-count-value {
   display: inline; }
+
+.word-count {
+  float: right; }
 
 .activity-list {
   background-color: #ffffff;

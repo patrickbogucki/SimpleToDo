@@ -6,8 +6,14 @@ h1 {
 	color: #000999;
 }
 
-.word-count {
+.word-count,
+.word-count-value {
 	display: inline;
+	// float: right;
+}
+
+.word-count {
+	float: right;
 }
 
 .activity-list {
