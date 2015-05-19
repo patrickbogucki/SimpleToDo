@@ -43,8 +43,13 @@ var main = function() {
 	});
 
 	$('#editModal').on('click', '.save', function() {
-		selectedActivity.find('p').text($('.edit-activity-textbox').val());
-		$(this).closest('.modal').modal('hide');
+		var newEditText = $('.edit-activity-textbox').val();
+		if(newEditText !== '') {
+			selectedActivity.find('p').text(newEditText);
+			$(this).closest('.modal').modal('hide');
+		} else {
+			alert('Please enter an activity');
+		}
 	});
 
 	$('.activities').on('click', '.delete', function() {
