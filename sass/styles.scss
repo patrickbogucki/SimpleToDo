@@ -42,8 +42,15 @@ h1 {
 }
 
 .activity-text {
-	float: left;
+	// float: left;
 	text-align: left;
+	word-wrap: break-word;
+	// width: 75%;
+	// overflow: scroll;
+}
+
+.expand {
+	// display: none;
 }
 
 .edit ,

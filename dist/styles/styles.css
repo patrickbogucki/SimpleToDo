@@ -31,8 +31,8 @@ h1 {
   margin-right: 10px; }
 
 .activity-text {
-  float: left;
-  text-align: left; }
+  text-align: left;
+  word-wrap: break-word; }
 
 .edit, .delete {
   margin-left: 10px; }
