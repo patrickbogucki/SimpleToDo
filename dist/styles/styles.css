@@ -26,6 +26,8 @@ h1 {
     list-style: none;
     margin-top: 3px;
     margin-bottom: 3px; }
+    .activities li p {
+      display: inline; }
 
 .activity-checkbox {
   margin-right: 10px; }
