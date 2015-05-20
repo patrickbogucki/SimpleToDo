@@ -9,7 +9,6 @@ h1 {
 .word-count,
 .word-count-value {
 	display: inline;
-	// float: right;
 }
 
 .word-count {
@@ -20,7 +19,6 @@ h1 {
 	background-color: #ffffff;
 	margin-top: 30px;
 	margin-bottom: 8px;
-	// margin-left: 15px;
 	padding: 0px;
 }
 
@@ -50,11 +48,8 @@ h1 {
 }
 
 .activity-text {
-	// float: left;
 	text-align: left;
 	word-wrap: break-word;
-	// width: 75%;
-	// overflow: scroll;
 }
 
 .completed-activity {
@@ -63,7 +58,6 @@ h1 {
 }
 
 .expand {
-	// display: none;
 }
 
 .edit ,
