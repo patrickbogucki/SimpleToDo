@@ -72,7 +72,6 @@ var main = function() {
 				});
 			}
 		});
-		
 	});
 
 	$('.delete-all').on('click', function() {
