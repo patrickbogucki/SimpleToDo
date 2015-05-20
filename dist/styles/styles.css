@@ -14,7 +14,8 @@ h1 {
   background-color: #ffffff;
   margin-top: 30px;
   margin-bottom: 8px;
-  margin-left: 15px; }
+  margin-left: 15px;
+  padding: 0px; }
 
 .activity-item {
   text-align: right; }
@@ -24,10 +25,13 @@ h1 {
   padding: 0px; }
   .activities li {
     list-style: none;
-    margin-top: 3px;
-    margin-bottom: 3px; }
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px; }
     .activities li p {
       display: inline; }
+  .activities li:nth-child(even) {
+    background-color: #CCFFCC; }
 
 .activity-checkbox {
   margin-right: 10px; }

@@ -7,7 +7,7 @@ var main = function() {
 	var newEditText;
 	var selectedActivity;
 
-	resetWordCounter();
+	$('.word-count-value').text(max_word_count);
 	initWordCounter($('.new-activity-textbox'));
 	$('.edit-activity-textbox').attr('maxlength', max_word_count);
 
@@ -30,7 +30,7 @@ var main = function() {
 			keyboard: false
 		});
 
-		selectedActivity = $(this).prev('.activity-text');
+		selectedActivity = $(this).closest('.row').find('.activity-text');
 		$('#editModal').modal('show');
 		$('.edit-activity-textbox').val(selectedActivity.text());
 	});
