@@ -16,7 +16,7 @@ var main = function() {
 		if(activity.val() === '') {
 			alert('Please enter an activity.');
 		} else {
-			$('ul').append(activity_item_html(activity.val()));
+			$('.activities').prepend(activity_item_html(activity.val()));
 			$('.new-activity-textbox').val('');
 			$('.empty-text').addClass('empty');
 		}
@@ -54,13 +54,34 @@ var main = function() {
 	});
 
 	$('.activities').on('click', '.delete', function() {
-		$(this).parent().fadeOut('slow', function() {
+		$(this).closest('.activity-item').fadeOut('slow', function() {
 			$(this).remove();
 			if($('.activities li').length === 0) {
 				$('.empty-text').removeClass('empty');
 			}
 		});
 	});
+
+	$('.completed-selected').on('click', function() {
+		$('.activity-checkbox').each(function() {
+			if($(this).is(':checked')) {
+				$(this).prop('checked', false);
+				var activityItem = $(this).closest('.activity-item');
+				activityItem.appendTo('.activities');
+				activityItem.find('.activity-text').addClass('completed-activity');
+				$(this).hide();
+				activityItem.find('.edit').hide();
+			}
+		});
+	});
+
+
+
+
+
+
+
+
 
 	$('.delete-selected').on('click', function() {
 		$('.activity-checkbox').each(function() {

@@ -14,7 +14,6 @@ h1 {
   background-color: #ffffff;
   margin-top: 30px;
   margin-bottom: 8px;
-  margin-left: 15px;
   padding: 0px; }
 
 .activity-item {
@@ -39,6 +38,10 @@ h1 {
 .activity-text {
   text-align: left;
   word-wrap: break-word; }
+
+.completed-activity {
+  text-decoration: line-through;
+  opacity: 0.5; }
 
 .edit, .delete {
   margin-left: 10px; }
