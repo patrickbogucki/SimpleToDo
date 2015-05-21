@@ -69,12 +69,12 @@ var main = function() {
 	$('.completed-selected').on('click', function() {
 		$('.activity-checkbox').each(function() {
 			if($(this).is(':checked')) {
-				$(this).prop('checked', false);
+				// $(this).prop('checked', false);
 				var activityItem = $(this).closest('.activity-item');
 				activityItem.appendTo('.activities');
 				activityItem.find('.activity-text').addClass('completed-activity');
-				$(this).hide();
-				activityItem.find('.edit').hide();
+				$(this).remove();
+				activityItem.find('.edit').remove();
 			}
 		});
 	});
@@ -140,6 +140,8 @@ var main = function() {
 
 };
 
+
+// Still need to find a way to escape user input to avoid illegal code injection
 var activity_item_html = function(activity) { 
 	return '<li class="activity-item"><div class="row"><div class="col-xs-2 col-sm-1 activity-checkbox-col"><input type="checkbox" name="activity" class="activity-checkbox"></div><div class="col-xs-10 col-sm-8 activity-text"><p>' + activity + '</p></div><div class="col-xs-12 col-sm-3 activity-buttons"><button class="btn btn-default btn-xs expand">&#43;</button><button class="btn btn-default btn-xs edit" target="#editModal">Edit</button><button class="btn btn-default btn-xs delete">Delete</button></div></div></li>';
 };
