@@ -43,6 +43,10 @@ h1 {
 	}
 }
 
+.activity-checkbox-col {
+	text-align: center;
+}
+
 .activity-checkbox {
 	margin-right: 10px;
 }
@@ -50,6 +54,11 @@ h1 {
 .activity-text {
 	text-align: left;
 	word-wrap: break-word;
+	padding: 0px;
+}
+
+.activity-buttons {
+	
 }
 
 .completed-activity {
@@ -84,5 +93,6 @@ h1 {
 }
 
 input[type='checkbox'] {
-	margin-right: 20px;
+	// margin-right: 20px;
+	padding: 0px;
 }

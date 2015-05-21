@@ -32,12 +32,16 @@ h1 {
   .activities li:nth-child(even) {
     background-color: #CCFFCC; }
 
+.activity-checkbox-col {
+  text-align: center; }
+
 .activity-checkbox {
   margin-right: 10px; }
 
 .activity-text {
   text-align: left;
-  word-wrap: break-word; }
+  word-wrap: break-word;
+  padding: 0px; }
 
 .completed-activity {
   text-decoration: line-through;
@@ -53,4 +57,4 @@ h1 {
   display: none; }
 
 input[type='checkbox'] {
-  margin-right: 20px; }
+  padding: 0px; }
