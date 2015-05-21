@@ -61,7 +61,9 @@ var main = function() {
 	});
 
 	$('.select-all').on('click', function() {
-
+		$('.activity-item').each(function() {
+			$(this).find('.activity-checkbox').prop('checked', true);
+		});
 	});
 
 	$('.completed-selected').on('click', function() {
@@ -88,12 +90,6 @@ var main = function() {
 			});
 		});
 	});
-
-
-
-
-
-
 
 	$('.delete-selected').on('click', function() {
 		$('.activity-checkbox').each(function() {
