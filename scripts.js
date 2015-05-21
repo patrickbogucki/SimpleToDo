@@ -56,14 +56,12 @@ var main = function() {
 	$('.activities').on('click', '.delete', function() {
 		$(this).closest('.activity-item').fadeOut('slow', function() {
 			$(this).remove();
-			if($('.activities li').length === 0) {
-				$('.empty-text').removeClass('empty');
-			}
+			checkForActivities();
 		});
 	});
 
 	$('.select-all').on('click', function() {
-		
+
 	});
 
 	$('.completed-selected').on('click', function() {
@@ -86,9 +84,7 @@ var main = function() {
 			var activityItem = $(this).closest('li');
 			activityItem.fadeOut('slow', function() {
 				activityItem.remove();
-				if($('.activities li').length === 0) {
-					$('.empty-text').removeClass('empty');
-				}
+				checkForActivities();
 			});
 		});
 	});
@@ -104,9 +100,7 @@ var main = function() {
 			if($(this).is(':checked')) {
 				$(this).closest('li').fadeOut('slow', function() {
 					$(this).remove();
-					if($('.activities li').length === 0) {
-						$('.empty-text').removeClass('empty');
-					}
+					checkForActivities();
 				});
 			}
 		});
@@ -139,6 +133,13 @@ var main = function() {
 				return wordsRemaining;
 			});
 		});
+	}
+
+	// Checks for activities. If there are none, it removes a class so the area can display a message to the user
+	function checkForActivities() {
+		if($('.activities li').length === 0) {
+			$('.empty-text').removeClass('empty');
+		}
 	}
 
 };
