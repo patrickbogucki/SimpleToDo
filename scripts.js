@@ -1,3 +1,12 @@
+/*
+Possible Future Features To Add
+-Choice of item to add to list (Activity / Item with adjustable quantities)
+-Storing list locally somehow
+-Hooking up to a database to store and retrieve list
+-Some sort of navigation to practice using Bootstrap. 
+	-Lead to an about page and maybe a settings page?
+*/
+
 var max_word_count = 200;
 var max_line_char_length = 50;
 
