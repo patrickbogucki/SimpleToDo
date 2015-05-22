@@ -23,7 +23,7 @@ var main = function() {
 	$('form').on('click', '.add', function() {
 		activity = $('.new-activity-textbox');
 		if(activity.val() === '') {
-			alert('Please enter an activity.');
+			displayEmptyTextAlert($('.main-alert'));
 		} else {
 			$('.activities').prepend(activity_item_html());
 			var lastActivity = $('.activity-item').first();
@@ -60,7 +60,8 @@ var main = function() {
 			selectedActivity.find('p').text(newEditText);
 			$(this).closest('.modal').modal('hide');
 		} else {
-			alert('Please enter an activity');
+			displayEmptyTextAlert($('.edit-modal-alert'));
+			$('.edit-activity-textbox').focus();
 		}
 	});
 
@@ -140,6 +141,11 @@ var main = function() {
 				return wordsRemaining;
 			});
 		});
+	}
+
+	function displayEmptyTextAlert(div) {
+		div.html('Please enter an activity.');
+		div.animate({opacity: 1}, 400).delay(2000).animate({opacity: 0}, 400);
 	}
 
 	// Checks for activities. If there are none, it removes a class so the area can display a message to the user

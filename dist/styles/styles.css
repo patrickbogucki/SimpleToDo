@@ -4,6 +4,15 @@ body {
 h1 {
   color: #000999; }
 
+.form-header {
+  display: inline-block; }
+
+.main-alert, .edit-modal-alert {
+  opacity: 0;
+  display: inline-block;
+  margin-left: 40px;
+  color: #FA0000; }
+
 .word-count, .word-count-value {
   display: inline; }
 
