@@ -16,6 +16,12 @@ var main = function() {
 	var newEditText;
 	var selectedActivity;
 
+	if(localStorage.getItem('activityList')) {
+		$('.activity-list').html(localStorage.getItem('activityList'));
+	} else {
+		$('.empty-text').removeClass('empty');
+	}
+
 	$('.word-count-value').text(max_word_count);
 	initWordCounter($('.new-activity-textbox'));
 	$('.edit-activity-textbox').attr('maxlength', max_word_count);
@@ -30,6 +36,7 @@ var main = function() {
 			lastActivity.find('p').text(activity.val());
 			$('.new-activity-textbox').val('');
 			$('.empty-text').addClass('empty');
+			updateStorageList();
 		}
 		resetWordCounter();
 		$('.new-activity-textbox').focus();
@@ -59,6 +66,7 @@ var main = function() {
 		if(newEditText !== '') {
 			selectedActivity.find('p').text(newEditText);
 			$(this).closest('.modal').modal('hide');
+			updateStorageList();
 		} else {
 			displayEmptyTextAlert($('.edit-modal-alert'));
 			$('.edit-activity-textbox').focus();
@@ -81,12 +89,12 @@ var main = function() {
 	$('.completed-selected').on('click', function() {
 		$('.activity-checkbox').each(function() {
 			if($(this).is(':checked')) {
-				// $(this).prop('checked', false);
 				var activityItem = $(this).closest('.activity-item');
 				activityItem.appendTo('.activities');
 				activityItem.find('.activity-text').addClass('completed-activity');
 				$(this).remove();
 				activityItem.find('.edit').remove();
+				updateStorageList();
 			}
 		});
 	});
@@ -109,6 +117,7 @@ var main = function() {
 				$(this).closest('li').fadeOut('slow', function() {
 					$(this).remove();
 					checkForActivities();
+					updateStorageList();
 				});
 			}
 		});
@@ -118,9 +127,15 @@ var main = function() {
 		$('.activity-item').fadeOut('slow', function() {
 			$(this).remove();
 			$('.empty-text').removeClass('empty');
+			updateStorageList();
 		});
 	});
 	
+	function updateStorageList() {
+		var activityList = $('.activity-list').html();
+		localStorage.setItem('activityList', activityList);
+	}
+
 	function resetWordCounter() {
 		$(this).closest('form').find('.word-count-value').text(max_word_count);
 	}
