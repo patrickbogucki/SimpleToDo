@@ -1,10 +1,11 @@
 /*
 Possible Future Features To Add
 -Choice of item to add to list (Activity / Item with adjustable quantities)
--Storing list locally somehow
+-Storing list locally somehow *DONE*
 -Hooking up to a database to store and retrieve list
--Some sort of navigation to practice using Bootstrap. 
+-Some sort of navigation bar to practice using Bootstrap. 
 	-Lead to an about page and maybe a settings page?
+-Ability to move items around in list via arrows or dragging
 */
 
 var max_word_count = 200;
@@ -43,6 +44,15 @@ var main = function() {
 		$('.new-activity-textbox').focus();
 	});
 
+	$('.expand').on('click', function(event) {
+		if($(this).html() === '+') {
+			$(this).html('&#45;');
+		} else {
+			$(this).html('&#43;');
+		}
+		$(this).closest('.activity-item').find('.item-movement').stop().slideToggle('slow');
+	});
+
 	$('.activities').on('click', '.edit', function() {
 		$('#editModal').modal({
 			backdrop: 'static',
@@ -78,6 +88,7 @@ var main = function() {
 		$(this).closest('.activity-item').fadeOut('slow', function() {
 			$(this).remove();
 			checkForActivities();
+			updateStorageList();
 		});
 	});
 
@@ -108,6 +119,7 @@ var main = function() {
 			activityItem.fadeOut('slow', function() {
 				activityItem.remove();
 				checkForActivities();
+				updateStorageList();
 			});
 		});
 	});
@@ -172,7 +184,7 @@ var main = function() {
 	}
 
 	function activity_item_html() {
-		return '<li class="activity-item"><div class="row"><div class="col-xs-2 col-sm-1 activity-checkbox-col"><input type="checkbox" name="activity" class="activity-checkbox"></div><div class="col-xs-10 col-sm-8 activity-text"><p></p></div><div class="col-xs-12 col-sm-3 activity-buttons"><button class="btn btn-default btn-xs expand">&#43;</button><button class="btn btn-default btn-xs edit" target="#editModal">Edit</button><button class="btn btn-default btn-xs delete">Delete</button></div></div></li>';
+		return '<li class="activity-item"><div class="row"><div class="col-xs-2 col-sm-1 activity-checkbox-col"><input type="checkbox" name="activity" class="activity-checkbox"></div><div class="col-xs-10 col-sm-8 activity-text"><p></p></div><div class="col-xs-12 col-sm-3 activity-buttons"><button class="btn btn-default btn-xs expand">&#43;</button><button class="btn btn-default btn-xs edit" target="#editModal">Edit</button><button class="btn btn-default btn-xs delete">Delete</button></div></div><div class="row item-movement"><div class="col-md-12"><button class="btn btn-default btn-xs item-move-up">Move Up</button><button class="btn btn-default btn-xs item-move-down">Move Down</button><button class="btn btn-default btn-xs item-move-top">Move To Top</button><button class="btn btn-default btn-xs move-bottom">Move To Bottom</button></div></div></li>';
 	}
 
 };

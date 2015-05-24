@@ -67,3 +67,10 @@ h1 {
 
 input[type='checkbox'] {
   padding: 0px; }
+
+.item-movement {
+  text-align: left;
+  margin-top: 10px;
+  display: none; }
+  .item-movement button {
+    margin-right: 10px; }
