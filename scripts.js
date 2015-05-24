@@ -29,6 +29,7 @@ var main = function() {
 	$('form').on('click', '.add', function() {
 		activity = $('.new-activity-textbox');
 		if(activity.val() === '') {
+			// $('.main-alert').stop();
 			displayEmptyTextAlert($('.main-alert'));
 		} else {
 			$('.activities').prepend(activity_item_html());
@@ -160,7 +161,7 @@ var main = function() {
 
 	function displayEmptyTextAlert(div) {
 		div.html('Please enter an activity.');
-		div.animate({opacity: 1}, 400).delay(2000).animate({opacity: 0}, 400);
+		div.stop(true, true).animate({opacity: 1}, 400).delay(2000).animate({opacity: 0}, 400);
 	}
 
 	// Checks for activities. If there are none, it removes a class so the area can display a message to the user
