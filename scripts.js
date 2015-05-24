@@ -53,6 +53,22 @@ var main = function() {
 		$(this).closest('.activity-item').find('.item-movement').stop().slideToggle('slow');
 	});
 
+	$('item-move-up').on('click', function() {
+
+	});	
+
+	$('item-move-down').on('click', function() {
+
+	});
+
+	$('item-move-top').on('click', function() {
+
+	});
+
+	$('item-move-bottom').on('click', function() {
+
+	});
+
 	$('.activities').on('click', '.edit', function() {
 		$('#editModal').modal({
 			backdrop: 'static',
