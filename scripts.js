@@ -59,6 +59,7 @@ function main() {
 		prevActivityItem.before(activityItem);
 	});	
 
+	// Check if next item element has completed class before moving it
 	$('.activities').on('click', '.item-move-down', function() {
 		var activityItem = $(this).closest('.activity-item');
 		var nextActivityItem = activityItem.next();
@@ -71,8 +72,20 @@ function main() {
 		firstActivityItem.before(activityItem);
 	});
 
+	// Select last item. If it is completed, traverse up and add after first item that isn't completed.
 	$('.activities').on('click', '.item-move-bottom', function() {
-		$(this).closest('.activity-item').next('.activity-item').after($(this).closest('.activity-item'));
+		var activityItem = $(this).closest('.activity-item');
+		var lastActivityItem = $('.activity-item').last();
+		var tempBottomActivity = $('.activity-item').last();
+		while(true) {
+			if(!tempBottomActivity.hasClass('.completed-activity')) {
+				tempBottomActivity.after(activityItem);
+				break;
+			} else {
+				tempBottomActivity = tempBottomActivity.prev();
+			}
+		}
+		lastActivityItem.after(activityItem);
 	});
 
 	$('.activities').on('click', '.edit', function() {
@@ -207,7 +220,7 @@ function main() {
 	}
 
 	function activity_item_html() {
-		return '<li class="activity-item"><div class="row"><div class="col-xs-2 col-sm-1 activity-checkbox-col"><input type="checkbox" name="activity" class="activity-checkbox"></div><div class="col-xs-10 col-sm-8 activity-text"><p></p></div><div class="col-xs-12 col-sm-3 activity-buttons"><button class="btn btn-default btn-xs expand">&#43;</button><button class="btn btn-default btn-xs edit" target="#editModal">Edit</button><button class="btn btn-default btn-xs delete">Delete</button></div></div><div class="row item-movement"><div class="col-md-12"><button class="btn btn-default btn-xs item-move-up">Move Up</button><button class="btn btn-default btn-xs item-move-down">Move Down</button><button class="btn btn-default btn-xs item-move-top">Move To Top</button><button class="btn btn-default btn-xs move-bottom">Move To Bottom</button></div></div></li>';
+		return '<li class="activity-item"><div class="row"><div class="col-xs-2 col-sm-1 activity-checkbox-col"><input type="checkbox" name="activity" class="activity-checkbox"></div><div class="col-xs-10 col-sm-8 activity-text"><p></p></div><div class="col-xs-12 col-sm-3 activity-buttons"><button class="btn btn-default btn-xs expand">&#43;</button><button class="btn btn-default btn-xs edit" target="#editModal">Edit</button><button class="btn btn-default btn-xs delete">Delete</button></div></div><div class="row item-movement"><div class="col-md-12"><button class="btn btn-default btn-xs item-move-up">Move Up</button><button class="btn btn-default btn-xs item-move-down">Move Down</button><button class="btn btn-default btn-xs item-move-top">Move To Top</button><button class="btn btn-default btn-xs item-move-bottom">Move To Bottom</button></div></div></li>';
 	}
 
 }
