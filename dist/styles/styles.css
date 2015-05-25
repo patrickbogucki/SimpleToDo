@@ -52,7 +52,7 @@ h1 {
   word-wrap: break-word;
   padding: 0px; }
 
-.completed-activity {
+.completed-activity p {
   text-decoration: line-through;
   opacity: 0.5; }
 

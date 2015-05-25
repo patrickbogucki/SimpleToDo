@@ -75,17 +75,17 @@ function main() {
 	// Select last item. If it is completed, traverse up and add after first item that isn't completed.
 	$('.activities').on('click', '.item-move-bottom', function() {
 		var activityItem = $(this).closest('.activity-item');
-		var lastActivityItem = $('.activity-item').last();
+		// var lastActivityItem = $('.activity-item').last();
 		var tempBottomActivity = $('.activity-item').last();
 		while(true) {
-			if(!tempBottomActivity.hasClass('.completed-activity')) {
+			if(!tempBottomActivity.hasClass('completed-activity')) {
 				tempBottomActivity.after(activityItem);
 				break;
 			} else {
 				tempBottomActivity = tempBottomActivity.prev();
 			}
 		}
-		lastActivityItem.after(activityItem);
+		// lastActivityItem.after(activityItem);
 	});
 
 	$('.activities').on('click', '.edit', function() {
@@ -139,7 +139,7 @@ function main() {
 			if($(this).is(':checked')) {
 				var activityItem = $(this).closest('.activity-item');
 				activityItem.appendTo('.activities');
-				activityItem.find('.activity-text').addClass('completed-activity');
+				activityItem.addClass('completed-activity');
 				$(this).remove();
 				activityItem.find('.edit').remove();
 				updateStorageList();
@@ -151,9 +151,8 @@ function main() {
 	// If there are no activities left, add message in place of activities
 	$('.delete-completed').on('click', function() {
 		$('.completed-activity').each(function() {
-			var activityItem = $(this).closest('li');
-			activityItem.fadeOut('slow', function() {
-				activityItem.remove();
+			this.fadeOut('slow', function() {
+				this.remove();
 				checkForActivities();
 				updateStorageList();
 			});

@@ -74,8 +74,10 @@ h1 {
 }
 
 .completed-activity {
-	text-decoration: line-through;
-	opacity: 0.5;
+	p {
+		text-decoration: line-through;
+		opacity: 0.5;
+	}
 }
 
 .expand {
