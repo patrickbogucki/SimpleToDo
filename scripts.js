@@ -11,7 +11,7 @@ Possible Future Features To Add
 var max_word_count = 200;
 var max_line_char_length = 50;
 
-var main = function() {
+function main() {
 	var activity;
 	var wordsRemaining;
 	var newEditText;
@@ -43,8 +43,8 @@ var main = function() {
 		resetWordCounter();
 		$('.new-activity-textbox').focus();
 	});
-
-	$('.expand').on('click', function(event) {
+ 
+	$('.activities').on('click', '.expand', function() {
 		if($(this).html() === '+') {
 			$(this).html('&#45;');
 		} else {
@@ -53,20 +53,26 @@ var main = function() {
 		$(this).closest('.activity-item').find('.item-movement').stop().slideToggle('slow');
 	});
 
-	$('item-move-up').on('click', function() {
-
+	$('.activities').on('click', '.item-move-up', function() {
+		var activityItem = $(this).closest('.activity-item');
+		var prevActivityItem = activityItem.prev();
+		prevActivityItem.before(activityItem);
 	});	
 
-	$('item-move-down').on('click', function() {
-
+	$('.activities').on('click', '.item-move-down', function() {
+		var activityItem = $(this).closest('.activity-item');
+		var nextActivityItem = activityItem.next();
+		nextActivityItem.after(activityItem);
 	});
 
-	$('item-move-top').on('click', function() {
-
+	$('.activities').on('click', '.item-move-top', function() {
+		var activityItem = $(this).closest('.activity-item');
+		var firstActivityItem = $('.activity-item').first();
+		firstActivityItem.before(activityItem);
 	});
 
-	$('item-move-bottom').on('click', function() {
-
+	$('.activities').on('click', '.item-move-bottom', function() {
+		$(this).closest('.activity-item').next('.activity-item').after($(this).closest('.activity-item'));
 	});
 
 	$('.activities').on('click', '.edit', function() {
@@ -84,6 +90,7 @@ var main = function() {
 		initWordCounter($('.edit-activity-textbox'));
 		$('.edit-activity-textbox').focus();
 	});
+
 	$('#editModal').on('hidden.bs.modal', function() {
 		resetWordCounter();
 	});
@@ -203,6 +210,6 @@ var main = function() {
 		return '<li class="activity-item"><div class="row"><div class="col-xs-2 col-sm-1 activity-checkbox-col"><input type="checkbox" name="activity" class="activity-checkbox"></div><div class="col-xs-10 col-sm-8 activity-text"><p></p></div><div class="col-xs-12 col-sm-3 activity-buttons"><button class="btn btn-default btn-xs expand">&#43;</button><button class="btn btn-default btn-xs edit" target="#editModal">Edit</button><button class="btn btn-default btn-xs delete">Delete</button></div></div><div class="row item-movement"><div class="col-md-12"><button class="btn btn-default btn-xs item-move-up">Move Up</button><button class="btn btn-default btn-xs item-move-down">Move Down</button><button class="btn btn-default btn-xs item-move-top">Move To Top</button><button class="btn btn-default btn-xs move-bottom">Move To Bottom</button></div></div></li>';
 	}
 
-};
+}
 
 $(document).ready(main);
