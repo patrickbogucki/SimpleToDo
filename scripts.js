@@ -6,6 +6,7 @@ Possible Future Features To Add
 -Some sort of navigation bar to practice using Bootstrap. 
 	-Lead to an about page and maybe a settings page?
 -Ability to move items around in list via arrows or dragging
+-Close any expanded items when expanding another
 */
 
 var max_word_count = 200;
@@ -75,7 +76,6 @@ function main() {
 	// Select last item. If it is completed, traverse up and add after first item that isn't completed.
 	$('.activities').on('click', '.item-move-bottom', function() {
 		var activityItem = $(this).closest('.activity-item');
-		// var lastActivityItem = $('.activity-item').last();
 		var tempBottomActivity = $('.activity-item').last();
 		while(true) {
 			if(!tempBottomActivity.hasClass('completed-activity')) {
@@ -85,7 +85,6 @@ function main() {
 				tempBottomActivity = tempBottomActivity.prev();
 			}
 		}
-		// lastActivityItem.after(activityItem);
 	});
 
 	$('.activities').on('click', '.edit', function() {
@@ -141,7 +140,9 @@ function main() {
 				activityItem.appendTo('.activities');
 				activityItem.addClass('completed-activity');
 				$(this).remove();
+				activityItem.find('.expand').remove();
 				activityItem.find('.edit').remove();
+				activityItem.find('.item-movement').remove();
 				updateStorageList();
 			}
 		});
