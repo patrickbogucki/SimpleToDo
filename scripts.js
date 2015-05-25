@@ -1,12 +1,9 @@
 /*
 Possible Future Features To Add
 -Choice of item to add to list (Activity / Item with adjustable quantities)
--Storing list locally somehow *DONE*
 -Hooking up to a database to store and retrieve list
 -Some sort of navigation bar to practice using Bootstrap. 
 	-Lead to an about page and maybe a settings page?
--Ability to move items around in list via arrows or dragging
--Close any expanded items when expanding another
 */
 
 var max_word_count = 200;
@@ -31,8 +28,7 @@ function main() {
 	$('form').on('click', '.add', function() {
 		activity = $('.new-activity-textbox');
 		if(activity.val() === '') {
-			// $('.main-alert').stop();
-			displayEmptyTextAlert($('.main-alert'));
+ 			displayEmptyTextAlert($('.main-alert'));
 		} else {
 			$('.activities').prepend(activity_item_html());
 			var lastActivity = $('.activity-item').first();
@@ -45,13 +41,25 @@ function main() {
 		$('.new-activity-textbox').focus();
 	});
  
+ 	// Collapses any expanded items and toggles state of clicked item
 	$('.activities').on('click', '.expand', function() {
-		if($(this).html() === '+') {
+ 		if($(this).html() === '+') {
 			$(this).html('&#45;');
 		} else {
 			$(this).html('&#43;');
 		}
-		$(this).closest('.activity-item').find('.item-movement').stop().slideToggle('slow');
+		var clickedItem = $(this).closest('.activity-item');
+		if(!clickedItem.hasClass('expanded')) {
+			$('.activity-item').each(function() {
+				if($(this).hasClass('expanded')) {
+					$(this).removeClass('expanded');
+					$(this).find('.expand').html('&#43;');
+					$(this).find('.item-movement').stop().slideToggle('slow');
+				}
+			});
+		}
+		clickedItem.toggleClass('expanded');
+		clickedItem.find('.item-movement').stop().slideToggle('slow');
 	});
 
 	$('.activities').on('click', '.item-move-up', function() {
@@ -64,7 +72,9 @@ function main() {
 	$('.activities').on('click', '.item-move-down', function() {
 		var activityItem = $(this).closest('.activity-item');
 		var nextActivityItem = activityItem.next();
-		nextActivityItem.after(activityItem);
+		if(!nextActivityItem.hasClass('completed-activity')) {
+			nextActivityItem.after(activityItem);
+		}
 	});
 
 	$('.activities').on('click', '.item-move-top', function() {
@@ -152,8 +162,8 @@ function main() {
 	// If there are no activities left, add message in place of activities
 	$('.delete-completed').on('click', function() {
 		$('.completed-activity').each(function() {
-			this.fadeOut('slow', function() {
-				this.remove();
+			$(this).fadeOut('slow', function() {
+				$(this).remove();
 				checkForActivities();
 				updateStorageList();
 			});
