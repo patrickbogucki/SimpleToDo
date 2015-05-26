@@ -14,12 +14,32 @@ function main() {
 	var wordsRemaining;
 	var newEditText;
 	var selectedActivity;
+	var numUncompleteChecked = 0;
+	var numCompleteChecked = 0;
 
-	if(localStorage.getItem('activityList')) {
-		$('.activity-list').html(localStorage.getItem('activityList'));
-	} else {
-		$('.empty-text').removeClass('empty');
-	}
+	loadFromStorage();
+
+	// Set disabled state of mark selected as completed button.
+	// Should be enabled when an item is checked, but no checked item is already marked as completed.
+	
+
+	$('.activities').on('click', '.activity-checkbox', function() {
+		var activityItem = $(this).closest('.activity-item');
+		if($(this).prop('checked') && !activityItem.hasClass('completed-activity')) {
+			numUncompleteChecked++;
+		}
+		else if(!$(this).prop('checked') && !activityItem.hasClass('completed-activity')) {
+			numUncompleteChecked--;
+		}
+		else if($(this).prop('checked') && activityItem.hasClass('completed-activity')) {
+			numCompleteChecked++;
+		}
+		else if(!$(this).prop('checked') && activityItem.hasClass('completed-activity')) {
+			numCompleteChecked--;
+		}
+		setSelectButtons();
+		console.log(numUncompleteChecked);
+	});
 
 	$('.word-count-value').text(max_word_count);
 	initWordCounter($('.new-activity-textbox'));
@@ -35,7 +55,9 @@ function main() {
 			lastActivity.find('p').text(activity.val());
 			$('.new-activity-textbox').val('');
 			$('.empty-text').addClass('empty');
-			updateStorageList();
+			$('.select-all').removeClass('disabled');
+			$('.delete-all').removeClass('disabled');
+			updateToStorageList();
 		}
 		resetWordCounter();
 		$('.new-activity-textbox').focus();
@@ -66,6 +88,7 @@ function main() {
 		var activityItem = $(this).closest('.activity-item');
 		var prevActivityItem = activityItem.prev();
 		prevActivityItem.before(activityItem);
+		updateToStorageList();
 	});	
 
 	// Check if next item element has completed class before moving it
@@ -74,6 +97,7 @@ function main() {
 		var nextActivityItem = activityItem.next();
 		if(!nextActivityItem.hasClass('completed-activity')) {
 			nextActivityItem.after(activityItem);
+			updateToStorageList();
 		}
 	});
 
@@ -81,6 +105,7 @@ function main() {
 		var activityItem = $(this).closest('.activity-item');
 		var firstActivityItem = $('.activity-item').first();
 		firstActivityItem.before(activityItem);
+		updateToStorageList();
 	});
 
 	// Select last item. If it is completed, traverse up and add after first item that isn't completed.
@@ -90,6 +115,7 @@ function main() {
 		while(true) {
 			if(!tempBottomActivity.hasClass('completed-activity')) {
 				tempBottomActivity.after(activityItem);
+				updateToStorageList();
 				break;
 			} else {
 				tempBottomActivity = tempBottomActivity.prev();
@@ -122,7 +148,7 @@ function main() {
 		if(newEditText !== '') {
 			selectedActivity.find('p').text(newEditText);
 			$(this).closest('.modal').modal('hide');
-			updateStorageList();
+			updateToStorageList();
 		} else {
 			displayEmptyTextAlert($('.edit-modal-alert'));
 			$('.edit-activity-textbox').focus();
@@ -133,14 +159,23 @@ function main() {
 		$(this).closest('.activity-item').fadeOut('slow', function() {
 			$(this).remove();
 			checkForActivities();
-			updateStorageList();
+			updateToStorageList();
 		});
 	});
 
 	$('.select-all').on('click', function() {
+		numCompleteChecked = 0;
+		numUncompleteChecked = 0;
 		$('.activity-item').each(function() {
 			$(this).find('.activity-checkbox').prop('checked', true);
+			if($(this).hasClass('completed-activity')) {
+				numCompleteChecked++;
+			} else {
+				numUncompleteChecked++;
+			}
 		});
+		checkForCompletedActivities();
+		setSelectButtons();
 	});
 
 	$('.completed-selected').on('click', function() {
@@ -149,11 +184,14 @@ function main() {
 				var activityItem = $(this).closest('.activity-item');
 				activityItem.appendTo('.activities');
 				activityItem.addClass('completed-activity');
-				$(this).remove();
+				$(this).prop('checked', false);
 				activityItem.find('.expand').remove();
 				activityItem.find('.edit').remove();
 				activityItem.find('.item-movement').remove();
-				updateStorageList();
+				resetButtons();
+				$('.delete-completed').removeClass('disabled');
+				checkForCompletedActivities();
+				updateToStorageList();
 			}
 		});
 	});
@@ -165,7 +203,8 @@ function main() {
 			$(this).fadeOut('slow', function() {
 				$(this).remove();
 				checkForActivities();
-				updateStorageList();
+				checkForCompletedActivities();
+				updateToStorageList();
 			});
 		});
 	});
@@ -176,21 +215,36 @@ function main() {
 				$(this).closest('li').fadeOut('slow', function() {
 					$(this).remove();
 					checkForActivities();
-					updateStorageList();
+					checkForCompletedActivities();
+					updateToStorageList();
 				});
 			}
 		});
+		resetButtons();
 	});
 
 	$('.delete-all').on('click', function() {
 		$('.activity-item').fadeOut('slow', function() {
 			$(this).remove();
-			$('.empty-text').removeClass('empty');
-			updateStorageList();
+			checkForActivities();
+			checkForCompletedActivities();
+			updateToStorageList();
+			resetButtons();
 		});
 	});
 	
-	function updateStorageList() {
+	function loadFromStorage() {
+		if(localStorage.getItem('activityList')) {
+			$('.activity-list').html(localStorage.getItem('activityList'));
+			$('.select-all').removeClass('disabled');
+			$('.delete-all').removeClass('disabled');
+			checkForActivities();
+		} else {
+			$('.empty-text').removeClass('empty');
+		}
+	}
+
+	function updateToStorageList() {
 		var activityList = $('.activity-list').html();
 		localStorage.setItem('activityList', activityList);
 	}
@@ -226,7 +280,39 @@ function main() {
 	function checkForActivities() {
 		if($('.activities li').length === 0) {
 			$('.empty-text').removeClass('empty');
+			$('.select-all').addClass('disabled');
+			$('.delete-all').addClass('disabled');
 		}
+	}
+
+	function checkForCompletedActivities() {
+		$('.delete-completed').addClass('disabled');
+		$('.activity-item').each(function() {
+			if($(this).hasClass('completed-activity')) {
+				$('.delete-completed').removeClass('disabled');
+				console.log('disabled act');
+			}
+		});
+	}
+
+	function setSelectButtons() {
+		if(numUncompleteChecked > 0 && numCompleteChecked === 0) {
+			$('.completed-selected').removeClass('disabled');
+		} else {
+			$('.completed-selected').addClass('disabled');
+		}
+		if(numUncompleteChecked > 0 || numCompleteChecked > 0) {
+			$('.delete-selected').removeClass('disabled');
+		} else {
+			$('.delete-selected').addClass('disabled');
+		}
+	}
+
+	function resetButtons() {
+		numUncompleteChecked = 0;
+		numCompleteChecked = 0;
+		$('.completed-selected').addClass('disabled');
+		$('.delete-selected').addClass('disabled');
 	}
 
 	function activity_item_html() {
