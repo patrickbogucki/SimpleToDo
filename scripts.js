@@ -159,6 +159,7 @@ function main() {
 		$(this).closest('.activity-item').fadeOut('slow', function() {
 			$(this).remove();
 			checkForActivities();
+			checkForCompletedActivities();
 			updateToStorageList();
 		});
 	});
