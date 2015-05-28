@@ -1,9 +1,16 @@
 /*
-Possible Future Features To Add
+FUTURE FEATURES
 -Choice of item to add to list (Activity / Item with adjustable quantities)
 -Hooking up to a database to store and retrieve list
 -Some sort of navigation bar to practice using Bootstrap. 
 	-Lead to an about page and maybe a settings page?
+*/
+
+/*
+BUGS TO FIX
+-Selecting multiple items, the clicking 'Delete Completed' allows for all checked non complete items to remain checked, but 'Mark Selected As Completed' stays disabled.
+	-Either enable 'Mark Selected As Completed' button after 'Delete Completed' is clicked and there are still checked off items
+	-Or, Set all checked items to false to remove checks from checkboxes
 */
 
 var max_word_count = 200;
