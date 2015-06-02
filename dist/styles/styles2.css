@@ -1,11 +1,8 @@
-* {
-  color: #FFFFFF; }
-
 body {
-  background-color: #594F4F; }
+  background-color: #ffffe0; }
 
 h1 {
-  color: #45ADA8; }
+  color: #4A97BE; }
 
 .form-header {
   display: inline-block; }
@@ -23,7 +20,7 @@ h1 {
   float: right; }
 
 .activity-list {
-  background-color: #547980;
+  background-color: #ffffff;
   margin-top: 30px;
   margin-bottom: 8px;
   padding: 0px; }
@@ -36,14 +33,13 @@ h1 {
   padding: 0px; }
   .activities li {
     list-style: none;
-    background-color: #547980;
     margin-top: 5px;
     margin-bottom: 5px;
     padding: 5px; }
     .activities li p {
       display: inline; }
   .activities li:nth-child(even) {
-    background-color: #45ADA8; }
+    background-color: #CCFFCC; }
 
 .activity-checkbox-col {
   text-align: center; }
