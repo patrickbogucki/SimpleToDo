@@ -8,9 +8,7 @@ FUTURE FEATURES
 
 /*
 BUGS TO FIX
--Selecting multiple items, the clicking 'Delete Completed' allows for all checked non complete items to remain checked, but 'Mark Selected As Completed' stays disabled.
-	-Either enable 'Mark Selected As Completed' button after 'Delete Completed' is clicked and there are still checked off items
-	-Or, Set all checked items to false to remove checks from checkboxes
+-Items that are in odd order (1, 3, 5...) are taller than even ordered items.
 */
 
 var max_word_count = 200;
