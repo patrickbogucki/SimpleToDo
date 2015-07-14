@@ -29,19 +29,16 @@ h1 {
   padding: 0px; }
 
 .activity-item {
-  text-align: right; }
+  text-align: right;
+  list-style: none;
+  background-color: #547980;
+  padding: 10px 5px; }
+  .activity-item p {
+    display: inline; }
 
 .activities {
   margin: 0px;
   padding: 0px; }
-  .activities li {
-    list-style: none;
-    background-color: #547980;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    padding: 5px; }
-    .activities li p {
-      display: inline; }
   .activities li:nth-child(even) {
     background-color: #45ADA8; }
 
@@ -64,7 +61,7 @@ h1 {
   margin-left: 10px; }
 
 .empty-text {
-  margin-top: 10px; }
+  margin: 10px; }
 
 .empty {
   display: none; }
@@ -75,6 +72,13 @@ input[type='checkbox'] {
 .item-movement {
   text-align: left;
   margin-top: 10px;
-  display: none; }
+  display: none;
+  padding-left: 0px; }
   .item-movement button {
     margin-right: 10px; }
+  @media (min-width: 590px) {
+    .item-movement {
+      padding-left: 80px; } }
+
+.modal-title {
+  color: #000000; }

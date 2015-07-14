@@ -40,21 +40,17 @@ h1 {
 
 .activity-item {
 	text-align: right;
+	list-style: none;
+	background-color: #547980;
+	padding:  10px 5px;
+	p {
+		display: inline;
+	}
 }
 
 .activities {
 	margin: 0px;
 	padding: 0px;
-	li {
-		list-style: none;
-		background-color: #547980;
-		margin-top: 5px;
-		margin-bottom: 5px;
-		padding: 5px;
-		p {
-			display: inline;
-		}
-	}
 	li:nth-child(even) {
 		background-color: #45ADA8;
 	}
@@ -104,7 +100,7 @@ h1 {
 }
 
 .empty-text {
-	margin-top: 10px;
+	margin: 10px;
 }
 
 .empty {
@@ -120,7 +116,15 @@ input[type='checkbox'] {
 	text-align: left;
 	margin-top: 10px;
 	display: none;
+	padding-left: 0px;
 	button {
 		margin-right: 10px;
 	}
+	@media (min-width: 590px) {
+		padding-left:  80px;
+	}
+}
+
+.modal-title {
+	color: #000000;
 }
